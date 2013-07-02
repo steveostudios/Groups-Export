@@ -1,7 +1,19 @@
 <?php 
 	if($_POST['oscimp_hidden'] == 'Y') { // Save button
 		$ge_group_id = $_POST['ge_group_id'];
+		$ge_export_id = $_POST['ge_export_id'];
+		$ge_export_fname = $_POST['ge_export_fname'];
+		$ge_export_lname = $_POST['ge_export_lname'];
+		$ge_export_flname = $_POST['ge_export_flname'];
+		$ge_export_email = $_POST['ge_export_email'];
+		
+		
 		update_option('ge_group_id', $ge_group_id);
+		update_option('ge_export_id', $ge_export_id);
+		update_option('ge_export_fname', $ge_export_fname);
+		update_option('ge_export_lname', $ge_export_lname);
+		update_option('ge_export_flname', $ge_export_flname);
+		update_option('ge_export_email', $ge_export_email);
     
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
@@ -14,9 +26,26 @@
 		<?php
 	} else { // Everything else
 		$ge_group_id = get_option('ge_group_id');
+		$ge_export_id = get_option('ge_export_id');
+		$ge_export_fname = get_option('ge_export_fname');
+		$ge_export_lname = get_option('ge_export_lname');
+		$ge_export_flname = get_option('ge_export_flname');
+		$ge_export_email = get_option('ge_export_email');
 
 
-	}	
+	}
+	$checked_id = ' ';
+	$checked_fname = ' ';
+	$checked_lname = ' ';
+	$checked_flname = ' ';
+	$checked_email = ' ';
+	
+	if($ge_export_id == 'on') {$checked_id = 'checked ';}
+	if($ge_export_fname == 'on') {$checked_fname = 'checked ';}
+	if($ge_export_lname == 'on') {$checked_lname = 'checked ';}
+	if($ge_export_flname == 'on') {$checked_flname = 'checked ';}
+	if($ge_export_email == 'on') {$checked_email = 'checked ';}
+	
 ?>
 
 <div class="wrap">
@@ -26,11 +55,11 @@
 	<input id="ge_hidden" type="hidden" name="oscimp_hidden" value="Y">
 	<p><?php _e("Member group: " ); ?><input type="text" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p>
 	<h4>THESE CHECKBOXES DO NOT WORK</h4>
-	<p><?php _e('ID') ?><input type="checkbox" /></p>
-	<p><?php _e('First Name') ?><input type="checkbox" /></p>
-	<p><?php _e('Last Name') ?><input type="checkbox" /></p>
-	<p><?php _e('First & Last Name') ?><input type="checkbox" /></p>
-  <p><?php _e('Email') ?><input type="checkbox" /></p>
+	<p><input type="checkbox" name="ge_export_id" <?php echo($checked_id); ?>/><?php _e(' ID') ?></p>
+	<p><input type="checkbox" name="ge_export_fname" <?php echo($checked_fname); ?>/><?php _e(' First Name') ?></p>
+	<p><input type="checkbox" name="ge_export_lname" <?php echo($checked_lname); ?>/><?php _e(' Last Name') ?></p>
+	<p><input type="checkbox" name="ge_export_flname" <?php echo($checked_flname); ?>/><?php _e(' First & Last Name') ?></p>
+  <p><input type="checkbox" name="ge_export_email" <?php echo($checked_email); ?>/><?php _e(' Email') ?></p>
 	<p class="submit">
 	<input type="submit" name="Submit" value="<?php _e('Update Options', 'oscimp_trdom' ) ?>" />
 	<input type='button' id='ge_download' name='ge_download' value='Download CSV' />

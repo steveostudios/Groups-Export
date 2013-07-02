@@ -11,7 +11,7 @@ Author URI:
 function oscimp_getproducts($product_cnt=1) {
 
 	//Connect to the OSCommerce database
-	$oscommercedb = new wpdb(get_option('ge_group_id'));
+	$oscommercedb = new wpdb(get_option('ge_group_id'),get_option('ge_export_id'),get_option('ge_export_fname'),get_option('ge_export_lname'),get_option('ge_export_flname'),get_option('ge_export_email'));
 
 	$retval = '';
 	
