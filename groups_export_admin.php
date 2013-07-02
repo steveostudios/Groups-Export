@@ -53,12 +53,13 @@
 
 <form id="ge_form" name="oscimp_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input id="ge_hidden" type="hidden" name="oscimp_hidden" value="Y">
-	<p><?php _e("Member group: " ); ?><input type="text" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p>
-	<h4>THESE CHECKBOXES DO NOT WORK</h4>
+	<h4>Export Group</h4>
+	<p><?php _e("Group ID: " ); ?><input type="text" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p>
+	<h4>Export Columns</h4>
 	<p><input type="checkbox" name="ge_export_id" <?php echo($checked_id); ?>/><?php _e(' ID') ?></p>
-	<p><input type="checkbox" name="ge_export_fname" <?php echo($checked_fname); ?>/><?php _e(' First Name') ?></p>
-	<p><input type="checkbox" name="ge_export_lname" <?php echo($checked_lname); ?>/><?php _e(' Last Name') ?></p>
-	<p><input type="checkbox" name="ge_export_flname" <?php echo($checked_flname); ?>/><?php _e(' First & Last Name') ?></p>
+	<p><input type="checkbox" name="ge_export_fname" <?php echo($checked_fname); ?>/><?php _e(' First Name <--- DOESNT WORK YET') ?></p> 
+	<p><input type="checkbox" name="ge_export_lname" <?php echo($checked_lname); ?>/><?php _e(' Last Name <--- DOESNT WORK YET') ?></p>
+	<p><input type="checkbox" name="ge_export_flname" <?php echo($checked_flname); ?>/><?php _e(' First & Last Name <--- DOESNT WORK YET') ?></p>
   <p><input type="checkbox" name="ge_export_email" <?php echo($checked_email); ?>/><?php _e(' Email') ?></p>
 	<p class="submit">
 	<input type="submit" name="Submit" value="<?php _e('Update Options', 'oscimp_trdom' ) ?>" />
