@@ -1,7 +1,5 @@
-<?php 
-
-//print $foo = ($hour < 12) ? "Good morning!" : "Good afternoon!";
-
+<?php
+  global $wpdb;
 	if(isset($_POST['oscimp_hidden']) && $_POST['oscimp_hidden'] == 'Y') { // Save button
 		
 		$ge_group_id = (isset($_POST['ge_group_id']))? $_POST['ge_group_id'] : null;
@@ -53,7 +51,26 @@
 	<input id="ge_hidden" type="hidden" name="oscimp_hidden" value="Y">
 	<input type="hidden" name="server_root" value="<?php echo get_option("siteurl"); ?>" />
 	<h4>Export Group</h4>
-	<p><?php _e("Group ID: " ); ?><input type="text" id="ge_group_id" class="ge_input" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p>
+	<select id="ge_group_id" class="ge_input" name="ge_group_id">
+	  <option value="">--- Select a Group ---</option>
+	  <?php
+	    $groups = $wpdb->get_results(
+  	    "
+  	    SELECT `group_id`, `parent_id`, `name`, `description` 
+  	    FROM `wp_groups_group`
+  	    "
+      );
+      foreach($groups as $group) {
+        $selected = '';
+        if($ge_group_id == $group->group_id) {
+          $selected = ' selected="selected"';
+        }
+        echo '<option value="' . $group->group_id . '"' . $selected . '>' . $group->name . '</option>';
+      }
+	    
+	  ?>
+	</select>
+	<!-- <p><?php _e("Group ID: " ); ?><input type="text" id="ge_group_id" class="ge_input" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p> -->
 	<h4>Export Columns</h4>
 	<p><input type="checkbox" id="ge_export_id" class="ge_input" name="ge_export_id" <?php echo($checked_id); ?>/><?php _e(' ID') ?></p>
 	<p><input type="checkbox" id="ge_export_fname" class="ge_input" name="ge_export_fname" <?php echo($checked_fname); ?>/><?php _e(' First Name') ?></p> 
@@ -73,22 +90,11 @@ var $j = jQuery.noConflict();
 
 
 $j(document).ready(function() {
-/*
-  if($j('#ge_export_id').attr('checked')){
-    alert('checked');
-    $j("#ge_download").removeAttr("disabled");
-  }else {
-    alert('unchecked');
-    $j("#ge_download").attr("disabled", "disabled");
-  }
-*/
   $j(document).on('change', '.ge_input', function() {
     checkInputs();
   });
   
   checkInputs();
-  
-  
 
   function checkInputs() {
     if((!$j('#ge_export_id').attr('checked') && !$j('#ge_export_fname').attr('checked') && !$j('#ge_export_lname').attr('checked') && !$j('#ge_export_flname').attr('checked') && !$j('#ge_export_email').attr('checked') ) || $j('#ge_group_id').val().length == 0){
@@ -96,9 +102,7 @@ $j(document).ready(function() {
     } else {
       $j("#ge_download").removeAttr("disabled");
     }
-  }
-  
-  
+  } 
 });
 
 
