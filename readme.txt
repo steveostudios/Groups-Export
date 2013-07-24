@@ -11,7 +11,7 @@ Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups 
 
 == Description ==
 
-Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Email, First Name, Last Name, and First and Last Name. You can set your delimiter (comma, colon, semicolon, pipe, caret, tab), and, if there is only one field selected you can export as onn-line. 
+Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Email, First Name, Last Name, and First and Last Name. You can set your delimiter (comma, colon, semicolon, pipe, caret, tab), and, if there is only one field selected you can export as one-line. 
 
 == Installation ==
 
