@@ -2,7 +2,7 @@
 /*
 Plugin Name: Groups Export
 Plugin URI: http://steveostudios.tv/groups-export
-Description: 1-click CSV export for Groups (First Name, Last Name, First and Last Name, ID, Email)
+Description: Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/).
 Author: Steve Stone
 Version: 1.0
 Author URI: http://steveostudios.tv

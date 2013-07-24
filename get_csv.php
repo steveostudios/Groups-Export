@@ -13,6 +13,24 @@
 		$ge_export_flname = (isset($_POST['ge_export_flname']))? $_POST['ge_export_flname'] : null;
 		$ge_export_email = (isset($_POST['ge_export_email']))? $_POST['ge_export_email'] : null;
   
+    $ge_field_delimitor = (isset($_POST['ge_field_delimitor']))? $_POST['ge_field_delimitor'] : null;
+    $ge_oneline = (isset($_POST['ge_oneline']))? $_POST['ge_oneline'] : null;
+    
+    $field_delimitor = null;
+    if ($ge_field_delimitor == "comma") {
+      $field_delimitor = ',';
+    } elseif ($ge_field_delimitor == "colon") {
+      $field_delimitor = ':';
+    } elseif ($ge_field_delimitor == "semicolon") {
+      $field_delimitor = ';';
+    } elseif ($ge_field_delimitor == "pipe") {
+      $field_delimitor = '|';
+    } elseif ($ge_field_delimitor == "caret") {
+      $field_delimitor = '^';
+    } elseif ($ge_field_delimitor == "tab") {
+      $field_delimitor = "\t";
+    }
+  
     global $wpdb;
     
     $user_ids = $wpdb->get_results( 
@@ -60,12 +78,38 @@
         $result[$user_id->user_id]['email'] = $user_email;
       }
     }
-
-    foreach ($result as $row) {
-      fputcsv($outstream, $row, ',', '"');
+    if ($ge_oneline == 'on') {
+      $csv_string = '';
+      $first = true;
+      foreach ($result as $row) {
+        
+        if($first == true) {
+          reset($row);
+          $csv_string .= current($row);
+          $first = false;
+          //$csv_string = 'line 1';
+        } else {
+          reset($row);
+          $csv_string .= $field_delimitor;
+          $csv_string .= current($row);
+          //$csv_string .= $field_delimitor . $row;
+        }
+      }
+      fwrite($outstream, $csv_string);       
+    } else {
+      foreach ($result as $row) { 
+        fputcsv($outstream, $row, $field_delimitor, '"');
+      }
     }
+
+    
+    
     fclose($outstream);
   }
-  ob_end_clean();
+  /*
+if ($ge_field_delimitor != "tab"){
+    ob_end_clean();
+  }
+*/ 
   ge_csv_export();
 ?>
