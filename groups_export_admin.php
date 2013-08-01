@@ -4,6 +4,7 @@
 		
 		$ge_group_id = (isset($_POST['ge_group_id']))? $_POST['ge_group_id'] : null;
 		$ge_export_id = (isset($_POST['ge_export_id']))? $_POST['ge_export_id'] : null;
+		$ge_export_username = (isset($_POST['ge_export_username']))? $_POST['ge_export_username'] : null;
 		$ge_export_fname = (isset($_POST['ge_export_fname']))? $_POST['ge_export_fname'] : null;
 		$ge_export_lname = (isset($_POST['ge_export_lname']))? $_POST['ge_export_lname'] : null;
 		$ge_export_flname = (isset($_POST['ge_export_flname']))? $_POST['ge_export_flname'] : null;
@@ -13,6 +14,7 @@
 		
 		update_option('ge_group_id', $ge_group_id);
 		update_option('ge_export_id', $ge_export_id);
+		update_option('ge_export_username', $ge_export_username);
 		update_option('ge_export_fname', $ge_export_fname);
 		update_option('ge_export_lname', $ge_export_lname);
 		update_option('ge_export_flname', $ge_export_flname);
@@ -32,6 +34,7 @@
 		
 		$ge_group_id = get_option('ge_group_id');
 		$ge_export_id = get_option('ge_export_id');
+		$ge_export_username = get_option('ge_export_username');
 		$ge_export_fname = get_option('ge_export_fname');
 		$ge_export_lname = get_option('ge_export_lname');
 		$ge_export_flname = get_option('ge_export_flname');
@@ -44,6 +47,7 @@
 	unset($_POST['ge_action']);
 	
 	$checked_id = ' ';
+	$checked_username = ' ';
 	$checked_fname = ' ';
 	$checked_lname = ' ';
 	$checked_flname = ' ';
@@ -51,6 +55,7 @@
 	$checked_oneline = ' ';
 	
 	if($ge_export_id == 'on') {$checked_id = 'checked ';}
+	if($ge_export_username == 'on') {$checked_username = 'checked ';}
 	if($ge_export_fname == 'on') {$checked_fname = 'checked ';}
 	if($ge_export_lname == 'on') {$checked_lname = 'checked ';}
 	if($ge_export_flname == 'on') {$checked_flname = 'checked ';}
@@ -89,6 +94,7 @@
 	<!-- <p><?php _e("Group ID: " ); ?><input type="text" id="ge_group_id" class="ge_input" name="ge_group_id" value="<?php echo $ge_group_id; ?>" size="20"><?php _e(" ex: 2"); ?></p> -->
 	<h4>Export Columns</h4>
 	<p><input type="checkbox" id="ge_export_id" class="ge_input" name="ge_export_id" <?php echo($checked_id); ?>/><?php _e(' ID') ?></p>
+	<p><input type="checkbox" id="ge_export_username" class="ge_input" name="ge_export_username" <?php echo($checked_username); ?>/><?php _e(' Userame') ?></p> 
 	<p><input type="checkbox" id="ge_export_fname" class="ge_input" name="ge_export_fname" <?php echo($checked_fname); ?>/><?php _e(' First Name') ?></p> 
 	<p><input type="checkbox" id="ge_export_lname" class="ge_input" name="ge_export_lname" <?php echo($checked_lname); ?>/><?php _e(' Last Name') ?></p>
 	<p><input type="checkbox" id="ge_export_flname" class="ge_input" name="ge_export_flname" <?php echo($checked_flname); ?>/><?php _e(' First & Last Name') ?></p>
@@ -138,13 +144,14 @@ $j(document).ready(function() {
   checkInputs();
 
   function checkInputs() {
-    if((!$j('#ge_export_id').prop('checked') && !$j('#ge_export_fname').prop('checked') && !$j('#ge_export_lname').prop('checked') && !$j('#ge_export_flname').prop('checked') && !$j('#ge_export_email').prop('checked') ) || $j('#ge_group_id').val().length == 0){
+    if((!$j('#ge_export_id').prop('checked') && !$j('#ge_export_username').prop('checked') && !$j('#ge_export_fname').prop('checked') && !$j('#ge_export_lname').prop('checked') && !$j('#ge_export_flname').prop('checked') && !$j('#ge_export_email').prop('checked') ) || $j('#ge_group_id').val().length == 0){
       $j("#ge_download").attr("disabled", "disabled");
     } else {
       $j("#ge_download").removeAttr("disabled");
     }
     var check_count = 0;
     if($j('#ge_export_id').prop('checked')) {check_count++;}
+    if($j('#ge_export_username').prop('checked')) {check_count++;}
     if($j('#ge_export_fname').prop('checked')) {check_count++;}
     if($j('#ge_export_lname').prop('checked')) {check_count++;}
     if($j('#ge_export_flname').prop('checked')) {check_count++;}

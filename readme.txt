@@ -7,11 +7,11 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Email, First Name, Last Name, and First and Last Name.
+Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Username, Email, First Name, Last Name, and First and Last Name.
 
 == Description ==
 
-Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Email, First Name, Last Name, and First and Last Name. You can set your delimiter (comma, colon, semicolon, pipe, caret, tab), and, if there is only one field selected you can export as onn-line. 
+Easy CSV (Comma Separated Value) export of user data, sorted by [itthinx Groups plugin](http://www.itthinx.com/plugins/groups/). Data includes User ID, Username, Email, First Name, Last Name, and First and Last Name. You can set your delimiter (comma, colon, semicolon, pipe, caret, tab), and, if there is only one field selected you can export as onn-line. 
 
 == Installation ==
 
@@ -39,6 +39,8 @@ Well, this can vary depending on your OS, browser, and user settings. For me (Ma
 
 == Changelog ==
 
+= 1.1 =
+* added option for "Username" (user_login)
 = 1.0 =
 * Option for what group you want to export
 * Option for what fields you want to export (User ID, Email, First Name, Last Name, and First and Last Name).

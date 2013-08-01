@@ -8,6 +8,7 @@
     $outstream = fopen("php://output",'w');
     $ge_group_id = (isset($_POST['ge_group_id']))? $_POST['ge_group_id'] : null;
 		$ge_export_id = (isset($_POST['ge_export_id']))? $_POST['ge_export_id'] : null;
+		$ge_export_username = (isset($_POST['ge_export_username']))? $_POST['ge_export_username'] : null;
 		$ge_export_fname = (isset($_POST['ge_export_fname']))? $_POST['ge_export_fname'] : null;
 		$ge_export_lname = (isset($_POST['ge_export_lname']))? $_POST['ge_export_lname'] : null;
 		$ge_export_flname = (isset($_POST['ge_export_flname']))? $_POST['ge_export_flname'] : null;
@@ -66,6 +67,17 @@
           $result[$user_id->user_id]['flname'] = $user_name->first_name . ' ' . $user_name->last_name;
         }
       }
+      // Username
+      if((isset($ge_export_username) && $ge_export_username == 'on')) {
+        $user_login = $wpdb->get_var(
+          "
+          SELECT `user_login` 
+          FROM  `wp_users` 
+          WHERE  `ID` =  $user_id->user_id
+          "
+        );
+        $result[$user_id->user_id]['username'] = $user_login;
+      }
       // Email
       if(isset($ge_export_email) && $ge_export_email == 'on') {    
         $user_email = $wpdb->get_var(
@@ -106,10 +118,6 @@
     
     fclose($outstream);
   }
-  /*
-if ($ge_field_delimitor != "tab"){
-    ob_end_clean();
-  }
-*/ 
+
   ge_csv_export();
 ?>
